@@ -1,0 +1,36 @@
+doctype html
+html
+    head
+        meta(http-equiv='cache-control', content='no-cache')
+        meta(http-equiv='expires', content='0')
+        meta(http-equiv='pragma', content='no-cache')
+        title= film.Title
+        link(href='images/favicon.png', rel='icon', type='image/svg')
+        link(href='//vjs.zencdn.net/4.12/video-js.css', rel='stylesheet')
+        link(href='stylesheets/style.css', rel='stylesheet', type='text/css')
+        link(href='videojs-resolution-selector/video-quality-selector.css', rel='stylesheet', type='text/css')
+        script(src='//vjs.zencdn.net/4.12/video.js')
+        script(src='videojs-resolution-selector/video-quality-selector.js')
+        script(src='//cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.10.1/videojs-contrib-hls.min.js')
+        script(src='videojs-resolution-selector/videosub.js')
+    body
+        .container
+            h1.header= film.Title
+        
+            video#my-player.video-js.vjs-default-skin(controls='', width='1280', height='720', data-setup='{ "plugins" : { "resolutionSelector" : { "default_res" : "720" } } }')
+                source(src= src, type='video/mp4', data-res='720')
+                source(src= src, type='video/mp4', data-res='1080')
+                track(label='English', kind='subtitles', srclang="en-US", src= subtitles)
+                track(label='Français', kind='subtitles', srclang='fr', src= subtitles)
+                track(label='Русский', kind='subtitles', srclang='ru', src= subtitles)
+                p.vjs-no-js
+                    | To view this video please enable JavaScript, and consider upgrading to a
+                    | web browser that
+                    a(href='http://videojs.com/html5-video-support/', target='_blank')
+                        | supports HTML5 video
+            .wrapper
+                h3.fim-plot Plot:
+                div
+                    p.plot= film.Plot
+                div
+                    img.img-poster(src= film.Poster alt='film poster')
